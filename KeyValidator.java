@@ -10,6 +10,7 @@
 
 import ecs100.*;
 import java.awt.Color;
+import java.util.Locale;
 
 /**
  * Key:
@@ -52,10 +53,21 @@ public class KeyValidator {
     /** CORE
      * Report "Valid" or "Invalid: ...reason...."
      */
-    public void validateKeyCore(String key){
+    public void validateKeyCore(String key) {
         /*# YOUR CODE HERE */
-
+        int length = key.length();
+        int first = key.charAt(0);
+        int last = key.charAt(length - 1);
+        if (key.length() < 9 || key.length() > 17) {
+            UI.println("Invalid: Keys need to be at least 8 characters and at most 16");
+        } else if (key.contains("-")) {
+            UI.println("Invalid: Cannot include a hyphen");
+        } else if (first == 35 || first == 36 || last == 35 || last == 36) {
+            UI.println("Invalid: Cannot end or start in # or $");
+        }
+        else UI.println("Valid");
     }
+
 
     /**
      * Asks user for key word and the name and then checks if it is a valid key word.
@@ -73,6 +85,32 @@ public class KeyValidator {
      */
     public void validateKeyCompletion(String key, String name){
         /*# YOUR CODE HERE */
+        int length = key.length();
+        int first = key.charAt(0);
+        int last = key.charAt(length - 1);
+        int lengthN = name.length();
+        int firstN = name.charAt(0);
+        boolean keyUpper = !key.equals(key.toLowerCase());
+        boolean keyLower = !key.equals(key.toUpperCase());
+        if (key.length() < 9 || key.length() > 17) {
+            UI.println("Invalid: Keys need to be at least 8 characters and at most 16");
+        }
+        if (key.contains("-")) {
+            UI.println("Invalid: Cannot include a hyphen");
+        }
+        if (first == 35 || first == 36 || last == 35 || last == 36) {
+            UI.println("Invalid: Cannot end or start in # or $");
+        }
+        if(first == firstN) {
+            UI.println("Invalid: Your password cannot start with the same letter as your name");
+        }
+        if(!keyUpper || !keyLower){
+            UI.println("Invalid: You need to have at least one upper case and one lower case letter");
+        }
+        if((key.contains("#") && key.contains("$")) || !(key.contains("#") || key.contains("$"))){
+            UI.println("Invalid: You must include either # or $ you can use it more than once but only pick one");
+        }
+        else UI.println("Valid");
 
     }
 
