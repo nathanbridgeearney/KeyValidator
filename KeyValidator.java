@@ -97,25 +97,33 @@ public class KeyValidator {
         int firstN = name.charAt(0);
         boolean keyUpper = !key.equals(key.toLowerCase());
         boolean keyLower = !key.equals(key.toUpperCase());
+        boolean Valid = true;
         if (key.length() < 9 || key.length() > 17) {
             UI.println("Invalid: Keys need to be at least 8 characters and at most 16");
+            Valid = false;
         }
         if (key.contains("-")) {
             UI.println("Invalid: Cannot include a hyphen");
+            Valid = false;
         }
         if (first == 35 || first == 36 || last == 35 || last == 36) {
             UI.println("Invalid: Cannot end or start in # or $");
+            Valid = false;
         }
         if(first == firstN) {
             UI.println("Invalid: Your password cannot start with the same letter as your name");
+            Valid = false;
         }
         if(!keyUpper || !keyLower){
             UI.println("Invalid: You need to have at least one upper case and one lower case letter");
+            Valid = false;
         }
         if((key.contains("#") && key.contains("$")) || !(key.contains("#") || key.contains("$"))){
             UI.println("Invalid: You must include either # or $ you can use it more than once but only pick one");
+            Valid = false;
         }
-        else UI.println("Valid");
+        if (Valid)UI.println("Valid Key");
+        else UI.println("Invalid Key");
 
     }
 
