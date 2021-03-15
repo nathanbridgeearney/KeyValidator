@@ -9,7 +9,6 @@
  */
 
 import ecs100.*;
-import java.awt.Color;
 import java.util.Locale;
 
 /**
@@ -95,7 +94,6 @@ public class KeyValidator {
         int length = key.length();
         int first = key.charAt(0);
         int last = key.charAt(length - 1);
-        int lengthN = name.length();
         int firstN = name.charAt(0);
         boolean keyUpper = !key.equals(key.toLowerCase());
         boolean keyLower = !key.equals(key.toUpperCase());
@@ -130,7 +128,7 @@ public class KeyValidator {
         int firstN = name.charAt(0);
         boolean keyUpper = !key.equals(key.toLowerCase());
         boolean keyLower = !key.equals(key.toUpperCase());
-        String lastTwoChar = name.substring(name.length()-2);
+        String lastTwoChar = name.substring(lengthN-2);
         String keyCheck = key.toLowerCase();
         lastTwoChar = lastTwoChar.toLowerCase();
         if (key.length() < 9 || key.length() > 17) {
