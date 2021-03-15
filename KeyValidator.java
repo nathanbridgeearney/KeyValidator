@@ -131,29 +131,48 @@ public class KeyValidator {
         String lastTwoChar = name.substring(lengthN-2);
         String keyCheck = key.toLowerCase();
         lastTwoChar = lastTwoChar.toLowerCase();
+        String RegexNumbers = ".*[0-9].*";
+        String RegexLetters = ".*[A-Z].*";
+        boolean Valid = true;
+
         if (key.length() < 9 || key.length() > 17) {
             UI.println("Invalid: Keys need to be at least 8 characters and at most 16");
+            Valid = false;
         }
         if (key.contains("-")) {
             UI.println("Invalid: Cannot include a hyphen");
+            Valid = false;
         }
         if (first == 35 || first == 36 || last == 35 || last == 36) {
             UI.println("Invalid: Cannot end or start in # or $");
+            Valid = false;
         }
         if(first == firstN) {
             UI.println("Invalid: Your password cannot start with the same letter as your name");
+            Valid = false;
         }
         if(!keyUpper || !keyLower){
             UI.println("Invalid: You need to have at least one upper case and one lower case letter");
+            Valid = false;
         }
         if((key.contains("#") && key.contains("$")) || !(key.contains("#") || key.contains("$"))){
             UI.println("Invalid: You must include either # or $ you can use it more than once but only pick one");
+            Valid = false;
         }
         if(keyCheck.contains(lastTwoChar)) {
             UI.println("Invalid: You cannot include any suffix of your name");
+            Valid = false;
         }
-        else UI.println("Valid");
-
+        if(!key.matches(RegexLetters) & !key.matches(RegexNumbers)){
+            Valid = false;
+            UI.println("Invalid: You must include both letters and numbers");
+        }
+        if (Valid){
+            UI.println("Valid Key");
+        }
+        else {
+            UI.println("Invalid Key");
+        }
     }
 
     public void setupGUI(){
