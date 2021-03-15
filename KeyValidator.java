@@ -79,6 +79,13 @@ public class KeyValidator {
         UI.println();
         this.validateKeyCompletion(key, name);
     }
+    public void doChallenge(){
+        UI.clearText();
+        String key = UI.askString("Key:   ");
+        String name = UI.askString("Your name:   ");
+        UI.println();
+        this.validateKeyChallenge(key, name);
+    }
 
     /** COMPLETION
      * Report that the key is valid or report ALL the rules that the key failed.
@@ -114,12 +121,49 @@ public class KeyValidator {
 
     }
 
+    public void validateKeyChallenge(String key, String name){
+        /*# YOUR CODE HERE */
+        int length = key.length();
+        int first = key.charAt(0);
+        int last = key.charAt(length - 1);
+        int lengthN = name.length();
+        int firstN = name.charAt(0);
+        boolean keyUpper = !key.equals(key.toLowerCase());
+        boolean keyLower = !key.equals(key.toUpperCase());
+        String lastTwoChar = name.substring(name.length()-2);
+        String keyCheck = key.toLowerCase();
+        lastTwoChar = lastTwoChar.toLowerCase();
+        if (key.length() < 9 || key.length() > 17) {
+            UI.println("Invalid: Keys need to be at least 8 characters and at most 16");
+        }
+        if (key.contains("-")) {
+            UI.println("Invalid: Cannot include a hyphen");
+        }
+        if (first == 35 || first == 36 || last == 35 || last == 36) {
+            UI.println("Invalid: Cannot end or start in # or $");
+        }
+        if(first == firstN) {
+            UI.println("Invalid: Your password cannot start with the same letter as your name");
+        }
+        if(!keyUpper || !keyLower){
+            UI.println("Invalid: You need to have at least one upper case and one lower case letter");
+        }
+        if((key.contains("#") && key.contains("$")) || !(key.contains("#") || key.contains("$"))){
+            UI.println("Invalid: You must include either # or $ you can use it more than once but only pick one");
+        }
+        if(keyCheck.contains(lastTwoChar)) {
+            UI.println("Invalid: You cannot include any suffix of your name");
+        }
+        else UI.println("Valid");
+
+    }
 
     public void setupGUI(){
         UI.initialise();
         UI.addButton("Clear", UI::clearText );
         UI.addButton("Validate Key Core", this::doCore );
         UI.addButton("Validate Key Completion", this::doCompletion );
+        UI.addButton("Validate Key Challenge", this::doChallenge);
         UI.addButton("Quit", UI::quit );
         UI.setDivider(1);       // Expand the text area
     }
