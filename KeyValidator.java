@@ -151,11 +151,11 @@ public class KeyValidator {
             UI.println("Invalid: Cannot include a hyphen");
             Valid = false;
         }
-        if (first == 35 || first == 36 || last == 35 || last == 36) {
-            UI.println("Invalid: Cannot end or start in # or $");
+        if (last == 35 || last == 36) {
+            UI.println("Invalid: Cannot end in # or $");
             Valid = false;
         }
-        if(first == firstN) {
+        if (first == firstN) {
             UI.println("Invalid: Your password cannot start with the same letter as your name");
             Valid = false;
         }
